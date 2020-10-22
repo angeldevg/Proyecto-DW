@@ -1,20 +1,20 @@
 <%-- 
-    Document   : index
-    Created on : Oct 9, 2020, 11:38:05 PM
+    Document   : inventarios
+    Created on : Oct 21, 2020, 10:30:39 PM
     Author     : Usuario
 --%>
 
-<%@page import="gt.edu.umg.desarrollo.proyecto.Model.MenuDao"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="gt.edu.umg.desarrollo.proyecto.Model.PuestoDao"%>
+<%@page import="gt.edu.umg.desarrollo.proyecto.Model.MenuDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Clinica</title>
+        <title>Inventarios</title>
         
-        <style type="text/css">
+        
+                <style type="text/css">
 			
 			* {
 				margin:0px;
@@ -72,10 +72,8 @@
         
     </head>
     <body>
+        <h1>inventarios</h1>
         
-        <h2>Clinica </h2>
-            
-      
         
         <div id="header">
 			<nav> <!-- Aqui estamos iniciando la nueva etiqueta nav -->
@@ -99,6 +97,8 @@
 				</ul>
 			</nav><!-- Aqui estamos cerrando la nueva etiqueta nav -->
 		</div>
+        
+        
         
         
     </body>

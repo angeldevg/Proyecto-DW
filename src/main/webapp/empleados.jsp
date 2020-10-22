@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="gt.edu.umg.desarrollo.proyecto.Model.MenuDao"%>
 <%@page import="gt.edu.umg.desarrollo.proyecto.Model.PuestoDao"%>
 <%@page import="java.util.HashMap"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,9 +25,93 @@
         <!--font Awesom-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+        
+        <style type="text/css">
+			
+			* {
+				margin:0px;
+				padding:0px;
+			}
+			
+			#header {
+				margin:auto;
+				width:500px;
+				font-family:Arial, Helvetica, sans-serif;
+			}
+			
+			ul, ol {
+				list-style:none;
+			}
+			
+			.nav > li {
+				float:left;
+			}
+			
+			.nav li a {
+				background-color:#000;
+				color:#fff;
+				text-decoration:none;
+				padding:10px 12px;
+				display:block;
+			}
+			
+			.nav li a:hover {
+				background-color:#434343;
+			}
+			
+			.nav li ul {
+				display:none;
+				position:absolute;
+				min-width:140px;
+			}
+			
+			.nav li:hover > ul {
+				display:block;
+			}
+			
+			.nav li ul li {
+				position:relative;
+			}
+			
+			.nav li ul li ul {
+				right:-140px;
+				top:0px;
+			}
+			
+		</style>
+        
+        
     </head>
     
     <body>
+        
+        
+        <div id="header">
+			<nav> <!-- Aqui estamos iniciando la nueva etiqueta nav -->
+				<ul class="nav">
+                                    
+                              <%
+                                  
+                                  MenuDao menu = new MenuDao();
+                                  
+                                  HashMap<String, String> menudrop = menu.ReadMEnu();
+                                  
+                                  for(String i : menudrop.keySet()){
+                                      
+                                      out.println("<li> <a href=" + i +">" + menudrop.get(i) + "</a> </li>");
+                                  }
+                                  
+                              %>  
+                              
+                                  
+					
+				</ul>
+			</nav><!-- Aqui estamos cerrando la nueva etiqueta nav -->
+		</div>
+        
+        
+        
+        
         <font face="Tw Cen MT" size="5" color="black">
         <h4 align="center">Clinica Medica</h4>
         <h1 align="center"><strong>NUEVO EMPLEADO</strong></h1>
