@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="gt.edu.umg.desarrollo.proyecto.Model.MenuDao"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="gt.edu.umg.desarrollo.proyecto.Model.PuestoDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -80,12 +81,20 @@
 			<nav> <!-- Aqui estamos iniciando la nueva etiqueta nav -->
 				<ul class="nav">
                                     
-                                
+                              <%
+                                  
+                                  MenuDao menu = new MenuDao();
+                                  
+                                  HashMap<String, String> drop = menu.ReadMEnu();
+                                  
+                                  for(String i : drop.keySet()){
+                                      
+                                      out.println("<li> <a href=" + i +">" + drop.get(i) + "</a> </li>");
+                                  }
+                                  
+                              %>  
                               
-                                    <li><a class="my-5" href="empleados.jsp">Empleados</a></li>
-                                    <li><a href="pacientes.jsp">Paciente</a></li>
-                                
-					
+                                  
 					
 				</ul>
 			</nav><!-- Aqui estamos cerrando la nueva etiqueta nav -->
