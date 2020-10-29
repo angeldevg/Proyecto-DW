@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <title>Programar cita</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="theme-color" content="#F0DB4F">
+    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+ 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+
+<body>
+
+<!--NavBar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-danger">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <a class="navbar-brand" href="#"> <img src="https://www.contapyme.com/images/comunes/modulos/perfiles-de-usuario/perfiles-de-usuario.png" alt="citas" width="70" height="60">  </a>
+      
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            
+            <li class="nav-item active">
+              <a class="nav-link" href="#"><b>Programar cita</b></a>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="#"><b>Buscar cita programada</b></a>
+            </li>
+    
+          </ul>
+
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-4" type="search" placeholder="Buscar Cita" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit"><a></a> <strong>Buscar</strong></button>
+          </form>
+          
+
+        </div>
+      </nav>
+
+
+      <div class="container mt-5">
+
+        <div class="row">
+          
+        </div>
+
+
+        <div class="row">
+          
+          <div class="col1 col-sm-4 col-md-4 col-xl-4 col-lg-4">
+
+            
+
+          </div>
+
+          <div id="formulario" class="col-sm-4 col-md-4 col-xl-4 col-lg-4" >
+
+
+            <form action="" method="post" class="form-group">
+
+                <h4 class="title">Programar cita</h4>
+                   
+                    <label for="lbl_id" ><b>ID</b></label>
+                    <input type="text" name="txt_id" id="txt_id" class="form-control" value="0"  readonly> 
+    
+                    <label for="lbl_producto" ><b>Nombre</b></label>
+                    <input type="text" name="txt_producto" id="txt_producto" class="form-control"  required>
+                    
+                    <label for="lbl_descripcion" ><b>Descripcion</b></label>
+                    <input type="text" name="txt_descripcion" id="txt_descripcion" class="form-control" required>
+                   
+                    <label for="lbl_costo" ><b>telefono</b></label>
+                    <input type="number" name="txt_costo" id="txt_costo" class="form-control" required>
+                   
+                    <label for="lbl_venta" ><b>Clinica</b></label>
+                    <input type="number"  name="txt_venta" id="txt_venta" class="form-control" required>
+                                   
+                    <label for="lbl_existencias" ><b>Numero de indentificacion</b></label>
+                    <input type="number"  name="txt_existencias" id="txt_existencias" class="form-control" required>
+                                
+            </form>
+
+            
+            <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-success btn-lg btn-block">Guardar</button>
+                
+                      <br><br>
+
+          </div>
+                
+
+          <div class="col-sm-4 col-md-4 col-xl-4 col-lg-4">
+           
+          </div>
+
+        </div>
+
+      </div>
+
+     
+
+  
+
+      
+
+      
+
+
+
+
+
+
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
