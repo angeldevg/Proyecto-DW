@@ -4,6 +4,9 @@
     Author     : Usuario
 --%>
 
+<%@page import="javax.swing.table.DefaultTableModel"%>
+<%@page import="gt.edu.umg.desarrollo.proyecto.Model.PacienteDao"%>
+<%@page import="gt.edu.umg.desarrollo.proyecto.Model.IPacienteDao"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="gt.edu.umg.desarrollo.proyecto.Model.MenuDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,272 +15,286 @@
 <html lang="es">
     <head>
         <title>Pacientes</title>
+        <link rel="shortcut icon" href="images/pacientes.png" />
+
+
         <!-- Required meta tags -->
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-        <!-- Estilos CSS -->
-        <link rel="stylesheet" href="css/main.css">
+        <!--stilo-->
+        <link rel="stylesheet" href="css/style.css">
 
-        <!--font Awesom-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/pacientes.css">
 
-        
-        <style type="text/css">
-			
-			* {
-				margin:0px;
-				padding:0px;
-			}
-			
-			#header {
-				margin:auto;
-				width:500px;
-				font-family:Arial, Helvetica, sans-serif;
-			}
-			
-			ul, ol {
-				list-style:none;
-			}
-			
-			.nav > li {
-				float:left;
-			}
-			
-			.nav li a {
-				background-color:#000;
-				color:#fff;
-				text-decoration:none;
-				padding:10px 12px;
-				display:block;
-			}
-			
-			.nav li a:hover {
-				background-color:#434343;
-			}
-			
-			.nav li ul {
-				display:none;
-				position:absolute;
-				min-width:140px;
-			}
-			
-			.nav li:hover > ul {
-				display:block;
-			}
-			
-			.nav li ul li {
-				position:relative;
-			}
-			
-			.nav li ul li ul {
-				right:-140px;
-				top:0px;
-			}
-			
-		</style>
-        
-        
+        <!--Iconos-->
+        <link href = "https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css"  rel = "stylesheet" >
+
+
+        <!--Google fonts-->
+
+        <link href = "https://fonts.googleapis.com/css2? family = Roboto: wght @ 100 & display = swap" rel = "stylesheet">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
     </head>
-
     <body>
-        
-        
-                <div id="header">
-			<nav> <!-- Aqui estamos iniciando la nueva etiqueta nav -->
-				<ul class="nav">
-                                    
-                              <%
-                                  
-                                  MenuDao menu = new MenuDao();
-                                  
-                                  HashMap<String, String> drop = menu.ReadMEnu();
-                                  
-                                  for(String i : drop.keySet()){
-                                      
-                                      out.println("<li> <a href=" + i +">" + drop.get(i) + "</a> </li>");
-                                  }
-                                  
-                              %>  
-                              
-                                  
-					
-				</ul>
-			</nav><!-- Aqui estamos cerrando la nueva etiqueta nav -->
-		</div>
-        
-
-        <div class="contaier mt-5 mx-4">
-
-            <h1>Registro de Pacientes</h1>
-
-            <form action="SrvPaciente" method="post" class="form-group">
 
 
-                <div class="row my-5"  id="fila1">
 
-                    <div class="col-md-auto col-xl-auto col-sm-auto">
+        <!--Header-->
+        <header>
 
-                    </div>
+            <!--NavBar-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <div class="col-md-2 col-xl-2 col-sm-2">
+                <a class="navbar-brand" href="#"> <img src="images/pacientes.png" alt="citas" width="70" height="60">  </a>
 
-                        <label for="lbl_id" ><b>identificacion</b></label>
-                        <input type="text" name="txt_id" id="txt_id" class="form-control" value="0"  readonly> 
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-                    </div>
+                        <li class="nav-item active">
 
-                    <div class="col-md-auto col-xl-auto col-sm-auto">
+                            <%
 
-                    </div>
+                                MenuDao menu = new MenuDao();
 
-                    <div class="col-md-4 col-xl-4 col-sm-4">
+                                HashMap<String, String> drop = menu.ReadMEnu();
 
-                        <label for="lbl_nombres" ><b>Nombre del Paciente</b></label>
-                        <input type="text" name="txt_nombres" id="txt_nombres" class="form-control" placeholder="Ingrese el nombre"  requiere> 
+                                for (String i : drop.keySet()) {
 
-                    </div>
+                                    out.println("<button class='btnmenu btn btn-info btn-sm' type='submit'><a href=" + i + ">" + drop.get(i) + "</a></button>");
+                                }
 
-                    <div class="col-md-auto col-xl-auto col-sm-auto">
+                            %>  
 
-                    </div>
+                        </li>
 
-                    <div class="col-md-3 col-xl-3 col-sm-3">
-                        <label for="lbl_dpi" ><b>Documento de identifiacion</b></label>
-                        <input type="number" name="txt_dpi" id="txt_dpi" class="form-control" placeholder="CUI"  required>
+                    </ul>
 
-                    </div>
-
-                    <div class="col-md-2 col-xl-2 col-sm-2">
-                        <label for="lbl_nombres" ><b>Fecha de nacimiento</b></label>
-                        <input type="date" name="txt_fecha" id="txt_fecha" class="form-control" placeholder="Nombre"  required>
-
-                    </div>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-4" type="search" placeholder="Buscar" aria-label="Search">
+                        <button class="btn btn-success my-2 my-sm-0" type="submit"><a></a> <strong>Buscar</strong></button>
+                    </form>
 
                 </div>
+            </nav>
+        </header>
 
 
-                <div class="row">
+        <div class="container">
+            <div class="table-responsive">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2> <b>Administracion de Pacientes</b></h2>
+                            </div>
+                            <div class="col-sm-6">
 
-                    <div class="col-md-auto col-sm-auto col-md-auto">
-
-                    </div>
-
-                    <div class="col-xl-4 col-md-3 col-sm-2">
-
-                        <label for="lbl_direccion" ><b>Direccion</b></label>
-                        <input type="text" name="txt_direccion" id="txt_direccion" class="form-control" placeholder="Calle Avenida Municipio Departamento"  required>                
-
-                    </div>
-
-
-                    <div class="col-xl-3 col-md-3 col-sm-2">
-
-                        <label for="lbl_celpaciente" ><b>Telefono del Paciente</b></label>
-                        <input type="number" name="txt_celpaciente" id="txt_celpaciente" class="form-control" placeholder="+(502) 45678903"  required>                
-
-                    </div>
+                                <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
+                                        class="material-icons">&#xE147;</i> <span>Agregar Paciente</span></a>
 
 
-                </div>
-
-                <div class="row">
-
-                    <div class="col-xl-12 col-md-12 col-sm-12">
-                        <br><br> <br>
-                        <h4>Datos Familiares</h4>
-                        <br><br>
-                    </div>
-
-
-                </div>
-
-
-                <div class="row">
-
-                    <div class="col-xl-auto">
-
-                    </div>
-
-
-                    <div class="col-xl-3 col-md-3 col-sm-3">
-                        <label for="lbl_celfamliar" ><b>Telefono del pariente</b></label>
-                        <input type="number" name="txt_celfamiliar" id="txt_celfamiliar" class="form-control" placeholder="+(502) 45678903"  required>                  
-                    </div>
-
-                </div>
-
-
-                <div class="row">
-
-                    <div class="col-xl-12 col-md-12 col-sm-12">
-                        <br><br> <br>
-                        <h4>Datos Medicos</h4>
-                        <br><br>
-                    </div>
-
-                </div>
-
-                <div class="row">
-
-                    <div class="col-xl-auto col-md-auto col-sm-auto">
-
-                    </div>
-
-                    <div class="row-lg-3 row-md-3">
-
-                        <label for="lbl_carne" ><b>Carné</b></label>
-                        <input type="text" name="txt_carne" id="txt_carne" class="form-control" placeholder="AG42423"  required>                  
-
-                    </div>
-
-                    <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2">
-
-                    </div>
-
-
-                    <div class="row-lg-3">
+                            </div>
                         </div>
-
-
-                    <div class="col-lg-auto col-xl-auto col-md-auto col-sm-auto">
-
                     </div>
 
-                    <div class="col-lg-3">
-                        <br>
-                        <button name="btn_agregar" id="btn_agregar"  value="agregar" class="lg btn btn-success" >Guardar</button>
-                        <button name="btn_buscar" id="btn_buscar"  value="buscar" class="lg btn btn-dagger" >Buscar Paciente</button>
 
-                    </div>
+                    <table class="table table-striped table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>DPI</th>
+                                <th>Direccion</th>
+                                <th>Telefono</th>
+                                <th>telefono Familiar</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Numero de Carne</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_pacientes">
+
+                            <%                      IPacienteDao paciente = new PacienteDao();
+                                DefaultTableModel tabla = new DefaultTableModel();
+
+                                tabla = paciente.GetPatient();
+
+                                tabla = paciente.GetPatient();
+
+                                for (int t = 0; t < tabla.getRowCount(); t++) {
+
+                                    out.println("<tr data-id=" + tabla.getValueAt(t, 0) + ">");
+                                    out.println("<td>" + tabla.getValueAt(t, 1) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 2) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 3) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 4) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 5) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 6) + "</td>");
+                                    out.println("<td>" + tabla.getValueAt(t, 7) + "</td>");
+                                    out.println("</tr>");
+
+                                }
+                            %>
+
+
+                        </tbody>
+                    </table>
 
 
                 </div>
-
-
-
-
-
-
-            </form>
-
-
-
-
-
+            </div>
         </div>
 
 
 
 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- Edit Modal HTML -->
+        <div id="addEmployeeModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+
+                    <form action="SrvPaciente" method="post" class="form-group">
+                        <div class="modal-header">
+
+                            <div>
+                                <a class="navbar-brand" href="#"> <img src="images/pacientes.png" alt="citas" width="100" height="100">  </a>
+                            </div>
+
+                            <h4 class="modal-title">Gestion de Pacientes</h4>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="limpiar()">&times</button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <label for="lbl_id" ><b>identificacion</b></label>
+                            <input type="text" name="txt_id" id="txt_id" class="form-control" value="0"  readonly> 
+
+                            <label for="lbl_nombres" ><b>Nombre del Paciente</b></label>
+                            <input type="text" name="txt_nombres" id="txt_nombres" class="form-control" placeholder="Ingrese el nombre"  requiere> 
+
+                            <label for="lbl_dpi" ><b>Documento de identifiacion</b></label>
+                            <input type="number" name="txt_dpi" id="txt_dpi" class="form-control" placeholder="CUI"  required>
+
+                            <label for="lbl_nombres" ><b>Fecha de nacimiento</b></label>
+                            <input type="date" name="txt_fecha" id="txt_fecha" class="form-control" placeholder="Nombre"  required>
+
+                            <label for="lbl_direccion" ><b>Direccion</b></label>
+                            <input type="text" name="txt_direccion" id="txt_direccion" class="form-control" placeholder="Calle Avenida Municipio Departamento"  required>                
+
+                            <label for="lbl_celpaciente" ><b>Telefono del Paciente</b></label>
+                            <input type="number" name="txt_celpaciente" id="txt_celpaciente" class="form-control" placeholder="+(502) 45678903"  required>                
+
+                            <br><br> 
+                            <h4>Datos Familiares</h4>
+                            <br>
+
+                            <label for="lbl_celfamliar" ><b>Telefono del pariente</b></label>
+                            <input type="number" name="txt_celfamiliar" id="txt_celfamiliar" class="form-control" placeholder="+(502) 45678903"  required>                  
+
+                            <br><br> <br>
+                            <h4>Datos Medicos</h4>
+                            <br>
+
+                            <label for="lbl_carne" ><b>Carné</b></label>
+                            <input type="text" name="txt_carne" id="txt_carne" class="form-control" placeholder="AG42423"  required>                  
+
+
+                        </div>
+
+                        <div class="modal-footer">
+
+
+
+                            <button name="btn_agregar" id="btn_agregar"  value="agregar" class="btn btn-primary">Agregar</button>
+
+                            <button name="btn_modificar" id="btn_modificar"  value="modificar" class="btn btn-success">Modificar</button>
+
+                            <button name="btn_eliminar" id="btn_eliminar"  value="eliminar" class="btn btn-danger" onclick="javascript:if (!confirm('¿Desea Eliminar?'))
+                                        return false" >Eliminar</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+          
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+        
+        <script type="text/javascript">
+            
+            
+            
+          $('#tbl_pacientes').on('click', 'tr td', function(evt){
+              var target, id, nombres, dpi, direccion, telefonop, telefonof, fecha, carne;
+              
+              target = $(event.target);
+              
+              id = target.parent().data("id");
+              nombres = target.parent("tr").find("td").eq(0).html();
+              dpi = target.parent("tr").find("td").eq(1).html();
+              direccion = target.parent("tr").find("td").eq(2).html();
+              telefonop = target.parent("tr").find("td").eq(3).html();
+              telefonof = target.parent("tr").find("td").eq(4).html();
+              fecha = target.parent("tr").find("td").eq(5).html();
+              carne = target.parent("tr").find("td").eq(6).html();
+        
+        
+              $("#txt_id").val(id);
+              $("#txt_nombres").val(nombres);
+              $("#txt_dpi").val(dpi);
+              $("#txt_fecha").val(fecha);
+              $("#txt_celpaciente").val(telefonop);
+              $("#txt_celfamiliar").val(telefonof);
+              $("#txt_direccion").val(direccion);
+              $("#txt_carne").val(carne);
+              
+              $("#addEmployeeModal").modal('show');            
+              
+         })
+         
+         
+         function limpiar(){
+       $("#txt_id").val(0);
+       $("#txt_nombres").val('');
+       $("#txt_dpi").val('');
+       $("#txt_fecha").val('');
+       $("#txt_celpaciente").val('');
+       $("#txt_celfamiliar").val('');
+       $("#txt_direccion").val('');
+       $("#txt_carne").val('');
+        }
+        
+        
+        </script>
+           
+    
     </body>
 </html>
