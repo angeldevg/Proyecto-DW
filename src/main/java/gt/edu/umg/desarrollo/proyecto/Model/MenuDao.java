@@ -19,7 +19,7 @@ public class MenuDao implements IMenuDao{
         try {
             conexion = new Conexion();
 
-            String query = "select ruta, nombre from menu;";
+            String query = "select ruta, nombre from menu";
 
             conexion.OpenConnection();
 
