@@ -1,0 +1,38 @@
+.navbar{
+    margin: auto;
+
+}
+
+i{
+    color: white;
+}
+
+.btn{
+    color: white;
+}
+
+.btnmenu{
+    color: white;
+    text-decoration: none;
+}
+
+.btnmenu > a{
+    color: white;
+    text-decoration: none;
+}
+
+
+hr {
+    height: 1px;
+    background-color: black;
+  }
+
+  .cardimagesbottom{
+
+    height: 60%;
+    width: 60%;
+  }
+  
+  .cards{
+      margin-top: auto;
+  }
