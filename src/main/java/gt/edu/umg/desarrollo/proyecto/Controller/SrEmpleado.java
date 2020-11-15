@@ -27,7 +27,8 @@ public class SrEmpleado extends HttpServlet {
 
             EmpleadoEntity empleado = new EmpleadoEntity();
             IEmpleadoDao dao = new EmpleadoDao();
-
+            
+            empleado.setIdEmpleado(Integer.valueOf(request.getParameter("txt_id")));
             empleado.setNombre(request.getParameter("txt_nombres"));
             empleado.setDireccion(request.getParameter("txt_direccion"));
             empleado.setTelefono(Integer.valueOf(request.getParameter("txt_telefono")));
@@ -35,7 +36,7 @@ public class SrEmpleado extends HttpServlet {
             empleado.setDpi(Long.valueOf(request.getParameter("txt_cui")));
             empleado.setIdTipoEmpleado(Integer.valueOf(request.getParameter("drop_puesto")));
             
-                  
+                 
 
             //Botno Guardar
             if ("agregar".equals(request.getParameter("btn_agregar"))) {
@@ -50,10 +51,43 @@ public class SrEmpleado extends HttpServlet {
                     out.println("<a href='index.jsp'>Regresar...</a>");
                 }
             }
+            
+            
+             // Boton modificar 
+            if ("modificar".equals(request.getParameter("btn_modificar"))){
+                
+                int contador = dao.UpdateEmployee(empleado);
+                
+             if (contador>0){
+             response.sendRedirect("empleados.jsp");
+             
+             }else{
+             out.println("<h1> xxxxxxx No se Modifico xxxxxxxxxxxx </h1>");
+             out.println("<a href='index.jsp'>Regresar...</a>");
+             }
+             }
+            
+            
+            // ----------------------------------------------------
+           
+           
+            // Boton eliminar 
+            if ("eliminar".equals(request.getParameter("btn_eliminar"))){
+                 
+                int contadorE = dao.DeleteEmployee(Integer.valueOf(request.getParameter("txt_id")));
+                 
+             if (contadorE>0){
+             response.sendRedirect("empleados.jsp");
+             
+             }else{
+             out.println("<h1> xxxxxxx No se Elimino xxxxxxxxxxxx </h1>");
+             out.println("<a href='index.jsp'>Regresar...</a>");
+             }
+             }
  
 
             
-
+            out.println(request.getParameter("txt_id"));
             out.println(request.getParameter("txt_nombres"));
             out.println(request.getParameter("txt_direccion"));
             out.println(Integer.valueOf(request.getParameter("txt_telefono")));
